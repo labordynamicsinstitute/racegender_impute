@@ -22,8 +22,8 @@ save(us.prop, file="us.prop.Rdata", compress = TRUE)
 There are a total of 95025 names in the SSA data base, for birth years from 1880 to 2016. Of those, 34.84% are strongly male (more than 80% of occurrences are for men), and 61.87% are strongly female. In other words, 96.7% of names are not particularly ambiguous names.
 
 ## Race
-Race can be inferred from family names using a variety of techniques, but again, they typically rely on data provided by the statistical agencies. In "ePluribus : Ethnicity on Social Networks" (2010), Jonathan Chang and Itamar Rosenn and Lars Backstrom and Cameron Marlow (all at Facebook) use the data from the U.S. Census Bureau's Genealogy Project
-(files from the 2000 Census).
+Race can be inferred from family names using a variety of techniques, but again, they typically rely on data provided by the statistical agencies. In "[ePluribus : Ethnicity on Social Networks](http://cameronmarlow.com/media/chang-ethnicity-on-social-networks_0.pdf)" (2010), Jonathan Chang and Itamar Rosenn and Lars Backstrom and Cameron Marlow (all at Facebook) use the data from the U.S. Census Bureau's Genealogy Project
+(files from the 2000 Census). While the black-white imputation is not as strong as a gender imputation, it is stronger than chance. For Asian races or Hispanic ethnicity, the relationship is stronger. Note that they only observe surname data from the Census data.
 
 # Program Sources
 

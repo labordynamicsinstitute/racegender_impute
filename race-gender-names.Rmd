@@ -41,8 +41,8 @@ strong.female <- nrow(us.prop[us.prop$prop.male < (1-strong.prop),])/nrow(us.pro
 There are a total of `r nrow(us.prop)` names in the SSA data base, for birth years from `r min.year` to `r max.year`. Of those, `r round(100*strong.male,2)`% are strongly male (more than `r 100*strong.prop`% of occurrences are for men), and `r round(100*strong.female,2)`% are strongly female. In other words, `r round(100*(strong.male + strong.female),2)`% of names are not particularly ambiguous names.
 
 ## Race
-Race can be inferred from family names using a variety of techniques, but again, they typically rely on data provided by the statistical agencies. In "ePluribus : Ethnicity on Social Networks" (2010), Jonathan Chang and Itamar Rosenn and Lars Backstrom and Cameron Marlow (all at Facebook) use the data from the U.S. Census Bureau's Genealogy Project
-(files from the 2000 Census).
+Race can be inferred from family names using a variety of techniques, but again, they typically rely on data provided by the statistical agencies. In "[ePluribus : Ethnicity on Social Networks](http://cameronmarlow.com/media/chang-ethnicity-on-social-networks_0.pdf)" (2010), Jonathan Chang and Itamar Rosenn and Lars Backstrom and Cameron Marlow (all at Facebook) use the data from the U.S. Census Bureau's Genealogy Project
+(files from the 2000 Census). While the black-white imputation is not as strong as a gender imputation, it is stronger than chance. For Asian races or Hispanic ethnicity, the relationship is stronger. Note that they only observe surname data from the Census data.
 
 # Program Sources
 
