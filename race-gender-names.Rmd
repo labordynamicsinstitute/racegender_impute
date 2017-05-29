@@ -1,0 +1,59 @@
+---
+title: "Race, Gender, and Names"
+author: "Lars Vilhuber"
+date: "May 1, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+strong.prop <- 0.8
+#library(namedata) - this fails
+#library(reshape2)
+library(data.table)
+source("readSSNames.R",echo = TRUE)
+source("byNameCount.R",echo = TRUE)
+source("matchSexes.R",echo=TRUE)
+```
+## Gender
+We will use a variety of data. First, use of SSA data for names and gender. We use names from  https://www.ssa.gov/oact/babynames/names.zip.
+
+```{r readSSA, cache=TRUE, eval=FALSE}
+usnames <- readSSANames("national",base.url = "ssa")
+save(usnames, file="usnames.Rdata", compress = TRUE)
+```
+We read in the frequency of gender by names. 
+```{r genderfreq, cache=TRUE, eval= FALSE}
+us.prop <- byNameCount(usnames)
+us.prop$prop.male <- us.prop$count.male/(us.prop$count.male + us.prop$count.female)
+save(us.prop, file="us.prop.Rdata", compress = TRUE)
+```
+```{r workaround, cache=TRUE, echo=FALSE}
+load("usnames.Rdata")
+load("us.prop.Rdata")
+min.year <- min(usnames$Year)
+max.year <- max(usnames$Year)
+strong.male <- nrow(us.prop[us.prop$prop.male > strong.prop,])/nrow(us.prop)
+strong.female <- nrow(us.prop[us.prop$prop.male < (1-strong.prop),])/nrow(us.prop)
+```
+There are a total of `r nrow(us.prop)` names in the SSA data base, for birth years from `r min.year` to `r max.year`. Of those, `r round(100*strong.male,2)`% are strongly male (more than `r 100*strong.prop`% of occurrences are for men), and `r round(100*strong.female,2)`% are strongly female. In other words, `r round(100*(strong.male + strong.female),2)`% of names are not particularly ambiguous names.
+
+## Race
+Race can be inferred from family names using a variety of techniques, but again, they typically rely on data provided by the statistical agencies. In "ePluribus : Ethnicity on Social Networks" (2010), Jonathan Chang and Itamar Rosenn and Lars Backstrom and Cameron Marlow (all at Facebook) use the data from the U.S. Census Bureau's Genealogy Project
+(files from the 2000 Census).
+
+# Program Sources
+
+- https://github.com/OpenGenderTracking/globalnamedata
+
+# Data Sources
+
+  United States Department of Commerce. Bureau of the Census; Frequently Occurring Surnames from the Census 2000. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], http://doi.org/10.3886/E100667V1
+
+  United States Department of Commerce. Bureau of the Census; Frequently Occurring Surnames from the 2010 Census. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], http://doi.org/10.3886/E100668V1
+
+  United States Department of Commerce. Bureau of the Census; Frequently Occurring Surnames from the 1990 Census. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], http://doi.org/10.3886/E100669V1
+
+  United States Social Security Administration; SSA: Beyond the Top 1000 Names. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], http://doi.org/10.3886/E100670V1
